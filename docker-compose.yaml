@@ -1,6 +1,9 @@
 ---
 version: '3.8'
 services:
+  service-name:
+    platform: linux/x86_64. # specify the architecture here
+    image: alterra-cms-iacss
   postgresql:
     image: postgres:latest
     container_name: postgresql

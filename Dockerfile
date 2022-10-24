@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM openjdk:11
 ARG JAR_FILE=target/*.jar
 WORKDIR /opt
 ENV PORT 8080

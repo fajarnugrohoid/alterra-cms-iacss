@@ -2,7 +2,7 @@
 # For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
 
 name: Maven Package
-
+  docker run -p 8080:8080
 on:
   push:
     branches: [ "main" ]
@@ -16,10 +16,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Set up JDK 1.8
+      - name: Set up JDK 11
         uses: actions/setup-java@v1
         with:
-          java-version: '1.8'
+          java-version: '11'
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven
