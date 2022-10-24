@@ -11,7 +11,7 @@ services:
     environment:
       # Default user is -> postgres
       PGDATA: /var/lib/postgresql/data
-      POSTGRES_PASSWORD: 'SevenEightTwo782' # Change to your unique password
+      POSTGRES_PASSWORD: '' # Change to your unique password
     networks:
       - my-network
 volumes:
