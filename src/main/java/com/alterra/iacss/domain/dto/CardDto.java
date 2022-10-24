@@ -2,6 +2,7 @@ package com.alterra.iacss.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
@@ -28,7 +29,7 @@ public class CardDto {
 
     private String custNumber;
 
-    private LimitProfileDto limitProfile;
+    private Long limitProfile;
 
     private LocalDateTime issueDate;
 
@@ -44,6 +45,6 @@ public class CardDto {
 
     private LocalDateTime pinRetryDate;
 
-    private CardStatusDto cardStatus;
+    private Long cardStatus;
     
 }

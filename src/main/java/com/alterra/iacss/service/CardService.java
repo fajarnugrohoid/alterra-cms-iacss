@@ -41,23 +41,24 @@ public class CardService {
         log.info("Executing add new card");
         try {
 
-            log.info( "request.getLimitProfile().getId:" + request.getLimitProfile().getId() );
+            log.info( "request.getLimitProfile().getId:" + request.getLimitProfile() );
 
-            Optional<LimitProfile> limitProfile = limitProfileRepository.findById( request.getLimitProfile().getId() );
+
+            Optional<LimitProfile> limitProfile = limitProfileRepository.findById( request.getLimitProfile() );
             if (limitProfile.isEmpty()) {
-                log.info("LimitProfile [{}] not found", request.getCardStatus().getId());
+                log.info("LimitProfile [{}] not found", request.getCardStatus() );
                 return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
             }
 
-            Optional<CardStatus> cardStatus = cardStatusRepository.findById(request.getCardStatus().getId());
+            Optional<CardStatus> cardStatus = cardStatusRepository.findById(request.getCardStatus());
             if (cardStatus.isEmpty()) {
-                log.info("CardStatus [{}] not found", request.getCardStatus().getId());
+                log.info("CardStatus [{}] not found", request.getCardStatus());
                 return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
             }
 
             Card card = mapper.map(request, Card.class);
-            log.info( "limitProfile.get:" + limitProfile.get() );
-            log.info( "cardStatus.get:" + cardStatus.get() );
+            //log.info( "limitProfile.get:" + limitProfile.get() );
+            //log.info( "cardStatus.get:" + cardStatus.get() );
             card.setLimitProfile( limitProfile.get() );
             card.setCardStatus( cardStatus.get() );
             cardRepository.save(card);
