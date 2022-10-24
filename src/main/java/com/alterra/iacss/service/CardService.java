@@ -17,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -37,6 +39,8 @@ public class CardService {
     @Autowired
     private ModelMapper mapper;
 
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
     public ResponseEntity<Object> addCard(CardDto request) {
         log.info("Executing add new card");
         try {
@@ -56,11 +60,22 @@ public class CardService {
                 return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
             }
 
+            String reqIssueDate = request.getIssueDate();
+            String reqExpiredDate = request.getExpiredDate();
+            String reqLastUsedDate = request.getLastUsedDate();
+            String reqPinRetryDate = request.getPinRetryDate();
+            LocalDateTime dtIssueDate = LocalDateTime.parse(reqIssueDate, formatter);
+            LocalDateTime dtExpiredDate = LocalDateTime.parse(reqExpiredDate, formatter);
+            LocalDateTime dtLastUsedDate = LocalDateTime.parse(reqLastUsedDate, formatter);
+            LocalDateTime dtPinRetryDate = LocalDateTime.parse(reqPinRetryDate, formatter);
+
             Card card = mapper.map(request, Card.class);
-            //log.info( "limitProfile.get:" + limitProfile.get() );
-            //log.info( "cardStatus.get:" + cardStatus.get() );
             card.setLimitProfile( limitProfile.get() );
             card.setCardStatus( cardStatus.get() );
+            card.setIssueDate( dtIssueDate );
+            card.setIssueDate( dtExpiredDate );
+            card.setIssueDate( dtLastUsedDate );
+            card.setIssueDate( dtPinRetryDate );
             cardRepository.save(card);
             
             return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, mapper.map(card, CardDto.class), HttpStatus.OK);

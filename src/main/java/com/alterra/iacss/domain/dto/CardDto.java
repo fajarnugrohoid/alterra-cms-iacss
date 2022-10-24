@@ -31,11 +31,11 @@ public class CardDto {
 
     private Long limitProfile;
 
-    private LocalDateTime issueDate;
+    private String issueDate;
 
-    private LocalDateTime expiredDate;
+    private String expiredDate;
 
-    private LocalDateTime lastUsedDate;
+    private String lastUsedDate;
 
     private String branchCode;
 
@@ -43,7 +43,7 @@ public class CardDto {
 
     private String pinRetryAttempt;
 
-    private LocalDateTime pinRetryDate;
+    private String pinRetryDate;
 
     private Long cardStatus;
     
