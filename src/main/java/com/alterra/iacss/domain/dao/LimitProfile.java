@@ -26,8 +26,8 @@ public class LimitProfile extends BaseDao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "limit_name", nullable = false)
-    private String limitName;
+    @Column(name = "limit_profile")
+    private String limitProfile;
 
     @Column(name = "description")
     private String description;

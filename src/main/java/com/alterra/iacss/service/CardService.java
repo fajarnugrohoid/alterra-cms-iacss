@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -40,7 +41,8 @@ public class CardService {
         log.info("Executing add new card");
         try {
 
-            /*
+            log.info( "request.getLimitProfile().getId:" + request.getLimitProfile().getId() );
+
             Optional<LimitProfile> limitProfile = limitProfileRepository.findById( request.getLimitProfile().getId() );
             if (limitProfile.isEmpty()) {
                 log.info("LimitProfile [{}] not found", request.getCardStatus().getId());
@@ -52,10 +54,12 @@ public class CardService {
                 log.info("CardStatus [{}] not found", request.getCardStatus().getId());
                 return ResponseUtil.build(AppConstant.ResponseCode.DATA_NOT_FOUND, null, HttpStatus.BAD_REQUEST);
             }
-            */
+
             Card card = mapper.map(request, Card.class);
-            //card.setLimitProfile(limitProfile.get());
-            //card.setCardStatus(cardStatus.get());
+            log.info( "limitProfile.get:" + limitProfile.get() );
+            log.info( "cardStatus.get:" + cardStatus.get() );
+            card.setLimitProfile( limitProfile.get() );
+            card.setCardStatus( cardStatus.get() );
             cardRepository.save(card);
             
             return ResponseUtil.build(AppConstant.ResponseCode.SUCCESS, mapper.map(card, CardDto.class), HttpStatus.OK);
@@ -132,7 +136,7 @@ public class CardService {
         }
     }
 
-    public ResponseEntity<Object> getAllCardSortByCategory(Sort.Direction direction) {
+    public ResponseEntity<Object> getAllCardSortByCardNumber(Sort.Direction direction) {
         try {
             log.info("Executing get all card sort by category [{}]", direction);
             List<Card> cards = cardRepository.findAll(Sort.by(direction, "category.id"));

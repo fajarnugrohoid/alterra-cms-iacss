@@ -26,7 +26,7 @@ public class CardController {
     }
 
     @GetMapping(value = "/status")
-    public ResponseEntity<Object> getCardByStatus(@RequestParam(value = "card_status_id", required = false) Long cardStatusId) {
+    public ResponseEntity<Object> getCardByStatus(@RequestParam(value = "status", required = false) Long cardStatusId) {
         return cardService.getCardByStatus(cardStatusId);
     }
 
@@ -36,13 +36,13 @@ public class CardController {
         return cardService.getAllCardPagination(request);
     }
 
-    @GetMapping(value = "/sort-by-category")
-    public ResponseEntity<Object> getAllCardSortByCategory(@RequestParam(value = "sort", required = true) Sort.Direction direction) {
-        return cardService.getAllCardSortByCategory(direction);
+    @GetMapping(value = "/sort-by-card-number")
+    public ResponseEntity<Object> getAllCardSortByCardNumber(@RequestParam(value = "sort", required = true) Sort.Direction direction) {
+        return cardService.getAllCardSortByCardNumber(direction);
     }
 
     @GetMapping(value = "/search")
-    public ResponseEntity<Object> searchCard(@RequestParam(value = "card_name") String cardName) {
+    public ResponseEntity<Object> searchCard(@RequestParam(value = "card_number") String cardName) {
         return cardService.searchCardByName(cardName);
     }
     

@@ -56,7 +56,7 @@ public class Card extends BaseDao {
     private String pinOffset;
 
     @Column(name = "pin_retry_attempt")
-    private String pinRetryAttempt;
+    private Integer pinRetryAttempt;
 
     @Column(name = "pin_retry_date")
     private LocalDateTime pinRetryDate;
