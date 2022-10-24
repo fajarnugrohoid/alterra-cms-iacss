@@ -1,0 +1,8 @@
+openapi: 3.0.0
+info:
+  title: Spring Boot Iacss
+  description: API documentation for spring boot Iacss
+  version: 1.0.0-SNAPSHOT
+servers:
+  - url: http://localhost:8080/api/
+    description: Development
